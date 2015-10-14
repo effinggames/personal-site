@@ -1,0 +1,108 @@
+@import 'nib'
+
+body {
+    background-color: rgb(32, 32, 32);
+    background: linear-gradient(to bottom, rgb(32, 32, 32) 0%, rgb(32, 32, 32) 100%);
+    font-family: roboto, arial, sans-serif;
+    font-size: 12px;
+    min-width: 80em;
+    text-align: center;
+}
+.container {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 1.66em;
+    width: 80em;
+}
+#header {
+    background-color: rgb(97, 145, 247);
+    box-sizing: border-box;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    color: #fff;
+    height: 11.66em;
+    padding-top: 5em;
+    position: relative;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.65);
+    h1 {
+        float: left;
+        font-size: 2.66em;
+    }
+    ul {
+        float: right;
+        font-size: 2em;
+    }
+    li {
+        display: inline-block;
+    }
+    li + li {
+      margin-left: 1em;
+    }
+}
+#footer {
+    background-color: rgb(32, 32, 32);
+    box-sizing: border-box;
+    color: #fff;
+    height: 7.08em;
+    padding-top: 3em;
+    position: relative;
+    p {
+        font-size: 1.33em;
+    }
+}
+#main {
+    background: url(/img/contemporary_china_2.png) rgb(244,245,246);
+    color: #4C4C4C;
+    padding: 7em 0 9em;
+}
+.page {
+    background-color: #fff;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.3);
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 2.86em 2em 3.16em 4em;
+    text-align: left;
+    width: 67.83em;
+    .pageImage {
+        background-color: rgb(1,6,15);
+        display: inline-block;
+        margin-right: 3.5em;
+        img {
+            box-shadow: 2px 2px 0 rgba(0,0,0,.3);
+            border: 1px solid rgba(#333,.83);
+            min-height: 16.66em;
+            width: 18.75em;
+        }
+    }
+    .contents {
+        display: inline-block;
+        padding-top: 1em;
+        text-align: left;
+        vertical-align: top;
+    }
+    h2 {
+        font-size: 2.66em;
+        line-height: 1em;
+        margin-bottom: .8em;
+    }
+    h3 {
+        font-size: 1.83em;
+        line-height: 1.3em;
+        margin-bottom: 0.5em;
+    }
+    p {
+        font-size: 1.3em;
+    }
+}
+
+#frontPage {
+    a {
+        background-color: #00CC66;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0,0,0,.68);
+        color: #fff;
+        font-size: 1.33em;
+        padding: 0.7em 0.8em;
+        margin-top: 1em;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+}

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charSet="utf-8"/>
+        <title>[[ title ]]</title>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type='text/css' href="[[ getVersionedAsset('/app.css') ]]"/>
+    </head>
+    <body ng-app="app" ng-controller="MainCtrl">
+        <div id="header">
+            <div class="container">
+                <h1><a href="[[ linkTo('index') ]]">Rob Graeber</a></h1>
+                <ul>
+                    <li><a href="[[ linkTo('about') ]]">About/Bio</a></li>
+                    <li><a href="https://www.linkedin.com/in/robgraeber" target="_blank">LinkedIn</a></li>
+                    <li><a href="http://www.effinggames.com" target="_blank">Effing Games</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <div class="container">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p>© [[ getCurrentYear() ]] Rob Graeber. All rights reserved.</p>
+            </div>
+        </div>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.10/es5-shim.min.js">
+        <![endif]-->
+        <script type="text/javascript">
+            window.data = [[ data | default({}, true) | stringify | safe ]];
+        </script>
+        <script type="text/javascript" src="[[ getVersionedAsset('/vendor.js') ]]"></script>
+        <script type="text/javascript" src="[[ getVersionedAsset('/app.js') ]]"></script>
+    </body>
+</html>
