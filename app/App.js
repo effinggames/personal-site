@@ -39,7 +39,7 @@ class App extends Express {
             AppRouter.build(name, params)
         );
         env.addGlobal('getVersionedAsset', fileName =>
-            hashJson ? fileName + '?v=' + hashJson[fileName] : fileName
+            productionMode ? fileName + '?v=' + hashJson[fileName] : fileName
         );
         env.addGlobal('getCurrentYear', () =>
             new Date().getFullYear()
