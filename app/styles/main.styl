@@ -1,8 +1,9 @@
 @import 'nib'
 
 body {
-    background-color: rgb(32, 32, 32);
-    background: linear-gradient(to bottom, rgb(32, 32, 32) 0%, rgb(32, 32, 32) 100%);
+    background: getVersionedAsset('/img/bg.jpg');
+    background-color: #2E7DBF;
+    background-size: cover;
     font-family: roboto, arial, sans-serif;
     font-size: 12px;
     min-width: 80em;
@@ -15,12 +16,13 @@ body {
     width: 80em;
 }
 #header {
-    background-color: rgb(97, 145, 247);
+    background-color: #000;
+    background-color: rgba(#000, 0.7);
     box-sizing: border-box;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
     color: #fff;
-    height: 11.66em;
-    padding-top: 5em;
+    height: 9.66em;
+    padding-top: 3.8em;
     position: relative;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.65);
     h1 {
@@ -33,13 +35,16 @@ body {
     }
     li {
         display: inline-block;
+        vertical-align: middle;
     }
     li + li {
       margin-left: 1em;
     }
 }
 #footer {
-    background-color: rgb(32, 32, 32);
+    background-color: #000;
+    background-color: rgba(#000, 0.8);
+    box-shadow: 0px 1000px 0px 1000px rgba(#000, 0.8);
     box-sizing: border-box;
     color: #fff;
     height: 7.08em;
@@ -50,16 +55,16 @@ body {
     }
 }
 #main {
-    background: url(/img/contemporary_china_2.png) rgb(244,245,246);
-    color: #4C4C4C;
+    color: #333;
     padding: 7em 0 9em;
 }
 .page {
-    background-color: #fff;
-    box-shadow: 2px 2px 0 rgba(0,0,0,.3);
+    background-color: #fefefe;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 5px 5px 5px rgba(0,0,0,.25);
     box-sizing: border-box;
     display: inline-block;
-    padding: 2.86em 2em 3.16em 4em;
+    padding: 3em 3.5em 3.17em;
     text-align: left;
     width: 67.83em;
     .pageImage {
@@ -69,14 +74,13 @@ body {
         margin-right: 2.5em;
         img {
             box-shadow: 2px 2px 0 rgba(0,0,0,.3);
-            border: 1px solid rgba(#333,.83);
+            border: 1px solid #3C6265;
             min-height: 16.66em;
             width: 18.75em;
         }
     }
     .contents {
         display: inline-block;
-        padding-top: 1em;
         text-align: left;
         vertical-align: top;
         width: 100%;
@@ -99,6 +103,10 @@ body {
     p:last-child {
         margin: 0;
     }
+    a {
+        font-weight: 700;
+        text-decoration: underline;
+    }
 }
 
 #frontPage {
@@ -108,9 +116,19 @@ body {
         box-shadow: 0 1px 2px rgba(0,0,0,.68);
         color: #fff;
         font-size: 1.33em;
+        font-weight: 500;
         padding: 0.7em 0.8em;
         margin-top: 1em;
+        text-decoration: none;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+    a:active {
+        box-shadow: 0 1px 1px rgba(0,0,0,.5);
+        position: relative;
+        top: 1px;
+    }
+    h2 {
+        margin-top: 0.15em;
     }
 }
 #aboutPage {

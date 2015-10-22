@@ -12,13 +12,14 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
+var stylusNodes = require('stylus').nodes;
 var cssMin = require('gulp-minify-css');
 var nib = require('nib');
 var es = require('event-stream');
 var merge = require('event-stream').concat;
 var browserSync = require('browser-sync');
 var reloadMe = require('browser-sync').reload;
-
+var fileHashes = {};
 
 var publicDir = __dirname + '/public',
     publicImgDir = __dirname + '/public/img';
@@ -55,7 +56,15 @@ var concatCSS = function(minifyMe) {
         './app/styles/reset.styl',
         './app/styles/main.styl'
     ])
-        .pipe(stylus({use: [nib()]}))
+        .pipe(stylus({
+            use: [ nib() ],
+            define: {
+                getVersionedAsset: function(urlNode) {
+                    var versionHash = fileHashes[urlNode.val] || '123'
+                    return new stylusNodes.Ident('url('+urlNode.val+'?v='+versionHash+')');
+                }
+            }
+        }))
         .pipe(concat('app.css'))
         .pipe(gulpif(minifyMe, cssMin()))
         .pipe(gulp.dest(publicDir))
@@ -94,14 +103,13 @@ var syncMe = function() {
 
 //gets a gulp-rev stream and converts it to a hashes.json
 var getHashes = function() {
-    var hashes = {};
 
     // Note that we're not emitting the files here... this consumer effectively
     // stores the rev hashes then swallows the entire pipeline.
     var collect = function(file, enc, cb) {
         if (file.revHash) {
             var filePath = file.revOrigPath.slice(file.revOrigBase.length);
-            hashes[filePath] = file.revHash;
+            fileHashes[filePath] = file.revHash;
         }
 
         return cb();
@@ -110,12 +118,12 @@ var getHashes = function() {
     // Once the stream is finished, we'll emit a single "hashes.json" file...
     var emit = function(cb) {
         var file = new gutil.File({
-            base: path.join(__dirname, publicDir),
+            base: __dirname,
             cwd:  __dirname,
-            path: path.join(__dirname, publicDir+'/hashes.json')
+            path: __dirname+'/.hashes.json'
         });
 
-        file.contents = new Buffer(JSON.stringify(hashes, null, '\t'));
+        file.contents = new Buffer(JSON.stringify(fileHashes, null, '\t'));
         this.push(file);
 
         return cb();
@@ -130,7 +138,7 @@ var revFiles = function() {
         .pipe(gulp.dest(publicDir))  // Note that we're writing the original files,
         .pipe(rev())                 // not the rev'd ones.
         .pipe(getHashes())
-        .pipe(gulp.dest(publicDir));
+        .pipe(gulp.dest(__dirname));
 };
 
 //cleans build folder
@@ -169,9 +177,10 @@ gulp.task('default', ['clean'], function() {
 
 //production build task
 gulp.task('build', ['clean'], function() {
-    return merge(copyStuff(), concatCSS(true), concatAppJS(true), concatVendorJS(true))
-        .on('end', function() {
-            minifyImages();
-            revFiles();
+    return merge(copyStuff(), concatCSS(false), concatAppJS(true), concatVendorJS(true)).on('end', function() {
+        minifyImages();
+        revFiles().on('end', function() {
+            concatCSS(true);
         });
+    });
 });

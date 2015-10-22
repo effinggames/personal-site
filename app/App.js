@@ -9,7 +9,7 @@ const productionMode = process.env.NODE_ENV === 'production';
 const viewDir = __dirname + '/views';
 const publicDir = __dirname + '/../public';
 
-let hashJson = productionMode ? require(publicDir+'/hashes.json') : null;
+let hashJson = productionMode ? require(__dirname+'/../.hashes.json') : null;
 /**
  * Main express app setup/configuration class
  */

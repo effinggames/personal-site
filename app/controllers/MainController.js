@@ -10,13 +10,13 @@ class MainController {
     }
     getAboutPage(req, res) {
         res.render('pages/about-page', {
-            title: 'Rob Graeber',
+            title: 'About/Bio of Robert L. Graeber',
             data: {}
         });
     }
     getContactPage(req, res) {
         res.render('pages/contact-page', {
-            title: 'Rob Graeber',
+            title: 'Contact Rob Graeber',
             data: {}
         });
     }
