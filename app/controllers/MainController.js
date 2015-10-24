@@ -1,7 +1,16 @@
 'use strict';
 const Nodemailer = require('nodemailer');
 const Constants = require('../../Constants');
+
 var transporter = Nodemailer.createTransport();
+var getEmailBody = req => `
+Subject: ${req.body.subject}
+
+Message: ${req.body.message}
+
+--
+This mail is sent via contact form on Rob Graeber http://www.robgraeber.com
+`
 
 class MainController {
     getFrontPage(req, res) {
@@ -21,20 +30,12 @@ class MainController {
     }
     sendEmail(req, res) {
         console.log(req.body);
-        
+
         transporter.sendMail({
             from: req.body.senderName + ` <${req.body.email}>`,
             to: Constants.contactEmail,
             subject: 'Message from RobGraeber.com',
-            html: `
-                Subject: ${req.body.subject}
-                <br><br>
-                Message: ${req.body.message}
-                <br><br>
-                --
-                <br><br>
-                This mail is sent via contact form on Rob Graeber http://www.robgraeber.com
-            `
+            text: getEmailBody(req);
         }, function(error, info){
             if(error){
                 return console.log('err:',error);
