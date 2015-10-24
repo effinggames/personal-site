@@ -2,11 +2,13 @@
 
 body {
     background: getVersionedAsset('/img/bg.jpg');
-    background-color: #2E7DBF;
+    background-color: #777;
     background-size: cover;
     font-family: roboto, arial, sans-serif;
     font-size: 12px;
+    min-height: 55em;
     min-width: 80em;
+    position: relative;
     text-align: center;
 }
 .container {
@@ -17,14 +19,14 @@ body {
 }
 #header {
     background-color: #000;
-    background-color: rgba(#000, 0.7);
+    background-color: rgba(#000, .7);
     box-sizing: border-box;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .24);
     color: #fff;
     height: 9.66em;
     padding-top: 3.8em;
     position: relative;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.65);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .65);
     h1 {
         float: left;
         font-size: 2.66em;
@@ -43,20 +45,21 @@ body {
 }
 #footer {
     background-color: #000;
-    background-color: rgba(#000, 0.8);
-    box-shadow: 0px 1000px 0px 1000px rgba(#000, 0.8);
+    background-color: rgba(#000, .8);
+    bottom: 0;
     box-sizing: border-box;
     color: #fff;
     height: 7.08em;
     padding-top: 3em;
-    position: relative;
+    position: absolute;
+    width: 100%;
     p {
         font-size: 1.33em;
     }
 }
 #main {
     color: #333;
-    padding: 7em 0 9em;
+    padding: 7em 0 16em;
 }
 .page {
     background-color: #fefefe;
@@ -93,7 +96,24 @@ body {
     h3 {
         font-size: 1.83em;
         line-height: 1.3em;
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
+    }
+    h4 {
+        font-size: 1.3em;
+        line-height: 1em;
+        margin-bottom: .4em;
+    }
+    textarea,
+    input {
+        border: 1px solid rgb(204,204,204);
+        font-size: 1.1em;
+        font-weight: 500;
+        padding: 0.3em;
+        width: 20em;
+        margin-bottom: 0.9em;
+    }
+    input {
+        height: 2em;
     }
     p {
         font-size: 1.4em;
@@ -108,31 +128,39 @@ body {
         text-decoration: underline;
     }
 }
-
+.ctaBtn {
+    background-color: #00CC66;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.68);
+    color: #fff;
+    font-size: 1.33em;
+    font-weight: 500;
+    padding: .7em .8em;
+    margin-top: 1em;
+    text-decoration: none !important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+.ctaBtn:active {
+    box-shadow: 0 1px 1px rgba(0,0,0,.5);
+    position: relative;
+    top: 1px;
+}
 #frontPage {
-    a {
-        background-color: #00CC66;
-        border-radius: 3px;
-        box-shadow: 0 1px 2px rgba(0,0,0,.68);
-        color: #fff;
-        font-size: 1.33em;
-        font-weight: 500;
-        padding: 0.7em 0.8em;
-        margin-top: 1em;
-        text-decoration: none;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    }
-    a:active {
-        box-shadow: 0 1px 1px rgba(0,0,0,.5);
-        position: relative;
-        top: 1px;
-    }
     h2 {
-        margin-top: 0.15em;
+        margin-top: .15em;
     }
 }
 #aboutPage {
     .pageImage {
         margin-right: 2.2em;
+    }
+}
+#contactPage {
+    h2 {
+        margin-bottom: .6em;
+    }
+    p {
+        font-size: 1.1em;
+        margin-bottom: 1.4em;
     }
 }

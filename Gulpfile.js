@@ -61,7 +61,8 @@ var concatCSS = function(minifyMe) {
             define: {
                 getVersionedAsset: function(urlNode) {
                     var versionHash = fileHashes[urlNode.val] || '123'
-                    return new stylusNodes.Ident('url('+urlNode.val+'?v='+versionHash+')');
+                    var urlStr = versionHash ? 'url('+urlNode.val+'?v='+versionHash+')' : 'url('+urlNode.val+')'
+                    return new stylusNodes.Ident(urlStr);
                 }
             }
         }))

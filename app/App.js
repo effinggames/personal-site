@@ -2,6 +2,7 @@
 const Fs = require('fs');
 const Express = require('express');
 const Compress = require('compression');
+const BodyParser = require('body-parser')
 const AppRouter = require('./AppRouter');
 const Nunjucks = require('nunjucks');
 
@@ -9,7 +10,7 @@ const productionMode = process.env.NODE_ENV === 'production';
 const viewDir = __dirname + '/views';
 const publicDir = __dirname + '/../public';
 
-let hashJson = productionMode ? require(__dirname+'/../.hashes.json') : null;
+let hashJson = productionMode ? require('../.hashes.json') : null;
 /**
  * Main express app setup/configuration class
  */
@@ -17,6 +18,7 @@ class App extends Express {
     constructor() {
         super();
         this.use(Compress());
+        this.use(BodyParser.json());
         this.use(AppRouter);
         this.use(Express.static(publicDir, { maxAge: productionMode ? 31536000000 : 0 })); //1 year caching
 

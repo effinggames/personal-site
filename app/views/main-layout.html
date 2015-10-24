@@ -34,7 +34,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.10/es5-shim.min.js">
         <![endif]-->
         <script type="text/javascript">
-            window.data = [[ data | default({}, true) | stringify | safe ]];
+            window.data = [[ data | default({}) | stringify | safe ]];
         </script>
         <script type="text/javascript" src="[[ getVersionedAsset('/vendor.js') ]]"></script>
         <script type="text/javascript" src="[[ getVersionedAsset('/app.js') ]]"></script>

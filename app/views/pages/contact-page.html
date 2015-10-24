@@ -4,7 +4,20 @@
     <div id="contactPage">
         <span class="contents">
             <h2>Contact Me</h2>
-            <p>Coming soon</p>
+            <p>For all partnership inquiries, fan mail, and etc. I regularly check my email and will get back to you soon!</p>
+            <form name="contactForm" ng-submit="sendEmail()">
+                <h4>Your Name</h4>
+                <input ng-model="contactForm.senderName" type="text" placeholder="John Doe" required/>
+                <h4>Your Email</h4>
+                <input ng-model="contactForm.email" type="email" placeholder="john@example.com" required/>
+                <h4>Subject</h4>
+                <input ng-model="contactForm.subject"type="text" placeholder="Partnerships, Biz Ops, Fan Mail, etc" required/>
+                <h4>Message</h4>
+                <textarea ng-model="contactForm.message" rows="10" required></textarea>
+                <div>
+                    <button class="ctaBtn">Submit</button>
+                </div>
+            </form>
         </span>
     </div>
 {% endblock %}

@@ -11,6 +11,7 @@ class AppRouter extends NamedRouter {
         this.get('/', 'index', MainController.getFrontPage);
         this.get('/about', 'about', MainController.getAboutPage);
         this.get('/contact', 'contact', MainController.getContactPage);
+        this.post('/api/sendEmail', MainController.sendEmail);
     }
 }
 
