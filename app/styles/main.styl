@@ -4,7 +4,7 @@ html {
     height: 100%;
 }
 body {
-    -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+getVersionedAsset('/img/bg.jpg')+'", sizingMethod="scale")';
+    // -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+getVersionedAsset('/img/bg.jpg')+'", sizingMethod="scale")';
     background: url(getVersionedAsset('/img/bg.jpg'));
     background-color: #777;
     background-size: cover;
@@ -13,6 +13,7 @@ body {
     font-weight: 500;
     min-height: 100%;
     min-width: 80em;
+    -ms-behavior: url(getVersionedAsset('/vendor/backgroundsize.min.htc'));
     position: relative;
     text-align: center;
     text-size-adjust: 100%;

@@ -72,7 +72,10 @@ var concatCSS = function(minifyMe) {
         .pipe(reloadMe({stream:true}));
 };
 var copyStuff = function() {
-    return gulp.src('./app/assets/img/**/*', { base: './app/assets' })
+    return gulp.src([
+        './app/assets/img/**/*',
+        './app/assets/vendor/**/*',
+    ], { base: './app/assets' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
