@@ -35,7 +35,7 @@ class MainController {
             from: req.body.senderName + ` <${req.body.email}>`,
             to: Constants.contactEmail,
             subject: 'Message from RobGraeber.com',
-            text: getEmailBody(req);
+            text: getEmailBody(req)
         }, function(error, info){
             if(error){
                 return console.log('err:',error);
