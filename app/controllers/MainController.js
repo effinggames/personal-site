@@ -2,6 +2,7 @@
 const Nodemailer = require('nodemailer');
 const Constants = require('../../Constants');
 const Promise = require('bluebird');
+const Logger = require('winston2');
 
 var transporter = Promise.promisifyAll(Nodemailer.createTransport());
 var getEmailBody = req => `
@@ -30,11 +31,14 @@ class MainController {
         });
     }
     sendEmail(req, res) {
+        Logger.info('Attempting to send mail:');
         var errRsp = {
             status: 'ERROR',
             results: 'An error occurred!'
         }
         if (req.body.senderName && req.body.email && req.body.subject && req.body.message) {
+            Logger.info('Request valid, sending email');
+            
             transporter.sendMailAsync({
                 from: req.body.senderName + ` <${req.body.email}>`,
                 to: Constants.contactEmail,
@@ -42,15 +46,21 @@ class MainController {
                 text: getEmailBody(req)
             }).then(info => {
                 if (info.pending.length > 0) {
+                    Logger.info('Email pending:', info);
                     throw new Error("Email must not be pending");
-                    return;
+                } else {
+                    Logger.info('Email sent successfully!');
+                    res.send({
+                        status: 'OK',
+                        results: 'Message sent successfully!'
+                    });
                 }
-                res.send({
-                    status: 'OK',
-                    results: 'Message sent successfully!'
-                });
-            }).catch(err => res.send(errRsp));
+            }).catch(err => {
+                Logger.info('Err:', err);
+                res.send(errRsp)
+            });
         } else {
+            Logger.info('Err: Missing fields -', req.body);
             res.send(errRsp);
         }
         
