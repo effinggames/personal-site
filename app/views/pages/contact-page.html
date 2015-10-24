@@ -15,7 +15,7 @@
                 <h4>Message</h4>
                 <textarea ng-model="contactForm.message" rows="10" required></textarea>
                 <div>
-                    <button class="ctaBtn">Submit</button>
+                    <button class="ctaBtn">Submit</button> <span class="statusText" ng-cloak>{{ contactForm.statusText }}</span>
                 </div>
             </form>
         </span>

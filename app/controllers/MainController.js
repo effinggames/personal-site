@@ -1,8 +1,9 @@
 'use strict';
 const Nodemailer = require('nodemailer');
 const Constants = require('../../Constants');
+const Promise = require('bluebird');
 
-var transporter = Nodemailer.createTransport();
+var transporter = Promise.promisifyAll(Nodemailer.createTransport());
 var getEmailBody = req => `
 Subject: ${req.body.subject}
 
@@ -30,21 +31,25 @@ class MainController {
     }
     sendEmail(req, res) {
         console.log(req.body);
-
-        transporter.sendMail({
+        var errRsp = {
+            status: 'ERROR',
+            results: 'An unknown error occurred.'
+        }
+        transporter.sendMailAsync({
             from: req.body.senderName + ` <${req.body.email}>`,
             to: Constants.contactEmail,
             subject: 'Message from RobGraeber.com',
             text: getEmailBody(req)
-        }, function(error, info){
-            if(error){
-                return console.log('err:',error);
+        }).then(info => {
+            if (info.pending.length > 0) {
+                throw new Error("Email must not be pending");
+                return;
             }
-            console.log('Message sent: ' + JSON.stringify(info));
-
-        });
-        res.send({status: 'OK'});
-
+            res.send({
+                status: 'OK',
+                results: 'Message sent successfully!'
+            });
+        }).catch(err => errRsp);
     }
 }
 
