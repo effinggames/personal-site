@@ -1,15 +1,21 @@
 @import 'nib'
 
+html {
+    height: 100%;
+}
 body {
-    background: getVersionedAsset('/img/bg.jpg');
+    -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+getVersionedAsset('/img/bg.jpg')+'", sizingMethod="scale")';
+    background: url(getVersionedAsset('/img/bg.jpg'));
     background-color: #777;
     background-size: cover;
     font-family: roboto, arial, sans-serif;
     font-size: 12px;
-    min-height: 55em;
+    font-weight: 500;
+    min-height: 100%;
     min-width: 80em;
     position: relative;
     text-align: center;
+    text-size-adjust: 100%;
 }
 .container {
     box-sizing: border-box;
@@ -78,6 +84,7 @@ body {
         img {
             box-shadow: 2px 2px 0 rgba(0,0,0,.3);
             border: 1px solid #3C6265;
+            display: block;
             min-height: 16.66em;
             width: 18.75em;
         }

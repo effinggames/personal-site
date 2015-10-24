@@ -30,26 +30,30 @@ class MainController {
         });
     }
     sendEmail(req, res) {
-        console.log(req.body);
         var errRsp = {
             status: 'ERROR',
-            results: 'An unknown error occurred.'
+            results: 'An error occurred!'
         }
-        transporter.sendMailAsync({
-            from: req.body.senderName + ` <${req.body.email}>`,
-            to: Constants.contactEmail,
-            subject: 'Message from RobGraeber.com',
-            text: getEmailBody(req)
-        }).then(info => {
-            if (info.pending.length > 0) {
-                throw new Error("Email must not be pending");
-                return;
-            }
-            res.send({
-                status: 'OK',
-                results: 'Message sent successfully!'
-            });
-        }).catch(err => errRsp);
+        if (req.body.senderName && req.body.email && req.body.subject && req.body.message) {
+            transporter.sendMailAsync({
+                from: req.body.senderName + ` <${req.body.email}>`,
+                to: Constants.contactEmail,
+                subject: 'Message from RobGraeber.com',
+                text: getEmailBody(req)
+            }).then(info => {
+                if (info.pending.length > 0) {
+                    throw new Error("Email must not be pending");
+                    return;
+                }
+                res.send({
+                    status: 'OK',
+                    results: 'Message sent successfully!'
+                });
+            }).catch(err => res.send(errRsp));
+        } else {
+            res.send(errRsp);
+        }
+        
     }
 }
 

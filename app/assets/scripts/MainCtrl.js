@@ -6,7 +6,7 @@
         .controller('MainCtrl', function($http, $scope, $window) {
             $scope.$window = $window;
 
-            $scope.sendEmail = function() {
+            $scope.sendEmail = function(e) {
                 $scope.contactForm.statusText = 'Submitting message..';
                 $http.post('/api/sendEmail', {
                     senderName: $scope.contactForm.senderName,
@@ -18,7 +18,7 @@
                         $scope.contactForm.senderName = $scope.contactForm.email = $scope.contactForm.subject = $scope.contactForm.message = null;
                         $scope.contactForm.statusText = 'Message successfully sent. Thanks!';
                     } else {
-                        $scope.contactForm.statusText = 'An unknown error occurred!';
+                        $scope.contactForm.statusText = 'An error occurred!';
                     }
                 })
             }
