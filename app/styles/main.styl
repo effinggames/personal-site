@@ -9,7 +9,7 @@ body {
     background-size: cover;
     font-family: roboto, arial, sans-serif;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 300;
     min-height: 100%;
     min-width: 80em;
     -ms-behavior: url(getVersionedAsset('/vendor/backgroundsize.min.htc'));
@@ -25,9 +25,8 @@ body {
 }
 #header {
     background-color: #000;
-    background-color: rgba(#000, .7);
+    background-color: rgba(#000,.7);
     box-sizing: border-box;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .24);
     color: #fff;
     height: 9.66em;
     padding-top: 3.8em;
@@ -39,7 +38,9 @@ body {
     }
     ul {
         float: right;
-        font-size: 2em;
+        font-size: 1.9em;
+        line-height: 1em;
+        margin-top: 0.1em;
     }
     li {
         display: inline-block;
@@ -51,13 +52,14 @@ body {
 }
 #footer {
     background-color: #000;
-    background-color: rgba(#000, .8);
+    background-color: rgba(#000,.7);
     bottom: 0;
     box-sizing: border-box;
     color: #fff;
     height: 7.08em;
     padding-top: 3em;
     position: absolute;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .65);
     width: 100%;
     p {
         font-size: 1.33em;
@@ -69,20 +71,20 @@ body {
 }
 .page {
     background-color: #fefefe;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow: 5px 5px 5px rgba(0,0,0,.25);
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 5px 5px 5px rgba(0,0,0,.1);
     box-sizing: border-box;
     display: inline-block;
     padding: 3em 3.5em 3.17em;
     text-align: left;
-    width: 67.83em;
+    width: 100%;
     .pageImage {
         background-color: rgb(1,6,15);
         display: inline-block;
         float: left;
-        margin-right: 2.5em;
+        margin-right: 3.5em;
         img {
-            box-shadow: 2px 2px 0 rgba(0,0,0,.3);
+            box-shadow: 1px 1px 1px rgba(0,0,0,.3);
             border: 1px solid #3C6265;
             display: block;
             min-height: 16.66em;
@@ -97,13 +99,14 @@ body {
     }
     h2 {
         font-size: 2.66em;
+        font-weight: 400;
         line-height: 1em;
         margin-bottom: .75em;
     }
     h3 {
-        font-size: 1.83em;
+        font-size: 1.73em;
         line-height: 1.3em;
-        margin-bottom: .5em;
+        margin-bottom: .7em;
     }
     h4 {
         font-size: 1.3em;
@@ -113,8 +116,8 @@ body {
     textarea,
     input {
         border: 1px solid rgb(204,204,204);
-        font-size: 1.1em;
-        font-weight: 500;
+        font-size: 1.15em;
+        font-weight: 400;
         padding: 0.3em;
         width: 20em;
         margin-bottom: 0.9em;
@@ -131,21 +134,23 @@ body {
         margin: 0;
     }
     a {
-        font-weight: 700;
+        font-weight: 400;
         text-decoration: underline;
+    }
+    b {
+        font-weight: 400;
     }
 }
 .ctaBtn {
     background-color: #00CC66;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.68);
+    box-shadow: 0 1px 1px rgba(0,0,0,.68);
     color: #fff;
     font-size: 1.33em;
     font-weight: 500;
     padding: .7em .8em;
     margin-top: 1em;
     text-decoration: none !important;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
 }
 .ctaBtn:active {
     box-shadow: 0 1px 1px rgba(0,0,0,.5);
