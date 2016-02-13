@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node Main.js",
+    "test": "echo \"NPM Test: no tests specified\"",
     "nodemon": "nodemon --ignore app/assets/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
   },
   "engines": {
