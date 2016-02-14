@@ -1,28 +1,21 @@
-Express-Template
+Personal-Site
 =================
 
-Chart for "Stock Asset Allocation vs Annualized 10-year SPX Return".
+[![CI Build](https://codeship.com/projects/0819a420-b4d7-0133-0f2e-3e023a4cadff/status?branch=master)] (https://codeship.com/projects/134012)  
 
-Using io.js, express, es6, highcharts, angular.
-
-Displays data generated from here: https://github.com/robgraeber/financial-scraper
+Personal landing page using Node, Express.js, Stylus.
 
 ### Usage:
 
 ```
-git clone https://github.com/robgraeber/financial-chart.git && cd financial-chart
-npm install
+git clone https://github.com/effinggames/personal-site.git && cd personal-site
+npm install && bower install
 gulp build
-(setup env variables)
 npm start
 ```
 
-Env variables:  
-`NODE_ENV`: Set to 'production' for template caching  
-`DATABASE_URL`: Postgres connection string (required)
-
 Gulp Tasks:  
 `gulp clean`: Cleans the /public folder and all compiled assets  
-`gulp default`: Compiles the assets without minifying / compressing  
+`gulp default`: Compiles the js / css without minifying / compressing  
 `gulp watch`: Watches the js, css, and image files for changes to recompile  
 `gulp build`: Compiles, minifies, and compresses the assets (for production)  
