@@ -1,8 +1,6 @@
 Personal-Site
 =================
 
-[![CI Build](https://codeship.com/projects/0819a420-b4d7-0133-0f2e-3e023a4cadff/status?branch=master)] (https://codeship.com/projects/134012)  
-
 Personal landing page using Node, Express.js, Stylus.
 
 ### Usage:
