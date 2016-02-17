@@ -1,18 +1,18 @@
 @import 'nib'
 
+offWhite = rgb(234, 238, 246);
+
 html {
     height: 100%;
 }
 body {
-    background: url(getVersionedAsset('/img/bg.jpg')) no-repeat fixed;
-    background-color: #777;
-    background-size: cover;
+    background: url(getVersionedAsset('/img/background.jpg')) no-repeat center top;
+    background-color: #000;
     font-family: roboto, arial, sans-serif;
     font-size: 12px;
     font-weight: 300;
     min-height: 100%;
-    min-width: 80em;
-    -ms-behavior: url(getVersionedAsset('/vendor/backgroundsize.min.htc'));
+    min-width: 78em;
     position: relative;
     text-align: center;
     text-size-adjust: 100%;
@@ -21,7 +21,7 @@ body {
     box-sizing: border-box;
     margin: 0 auto;
     padding: 0 1.66em;
-    width: 80em;
+    width: 78em;
 }
 #header {
     background-color: #000;
@@ -71,7 +71,7 @@ body {
 }
 .page {
     background-color: #fefefe;
-    background-color: rgba(255,255,255,0.95);
+    background-color: offWhite;
     box-shadow: 5px 5px 5px rgba(0,0,0,.1);
     box-sizing: border-box;
     display: inline-block;
@@ -84,7 +84,7 @@ body {
         float: left;
         margin-right: 3.5em;
         img {
-            box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.05);
             border: 1px solid #3C6265;
             display: block;
             min-height: 16.66em;
@@ -145,9 +145,9 @@ body {
     background-color: #00CC66;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0,0,0,.68);
-    color: #fff;
+    color: #F5F8FF;
     font-size: 1.33em;
-    font-weight: 500;
+    font-weight: 400;
     padding: .7em .8em;
     margin-top: 1em;
     text-decoration: none !important;
@@ -172,7 +172,7 @@ body {
         margin-bottom: .6em;
     }
     p {
-        font-size: 1.1em;
+        font-size: 1.12em;
         margin-bottom: 1.4em;
     }
     .statusText {
