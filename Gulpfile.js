@@ -19,15 +19,16 @@ var es = require('event-stream');
 var merge = require('event-stream').concat;
 var browserSync = require('browser-sync');
 var reloadMe = require('browser-sync').reload;
-var fileHashes = {};
 
 var publicDir = __dirname + '/public',
     publicImgDir = __dirname + '/public/img';
 
+var fileHashes = {};
+
 var concatAppJS = function(minifyMe) {
     var stream = gulp.src([
-            './app/assets/scripts/App.js',
-            './app/assets/scripts/**/*.js'
+            './assets/scripts/App.js',
+            './assets/scripts/**/*.js'
         ])
         .pipe(gulpif(minifyMe, ngAnnotate()))
         .pipe(sourcemaps.init())
@@ -42,6 +43,7 @@ var concatAppJS = function(minifyMe) {
         .pipe(gulpif(minifyMe, uglify()))
         .pipe(gulp.dest(publicDir));
 };
+
 var concatVendorJS = function(minifyMe) {
     return gulp.src([
         './bower_components/jquery/dist/jquery.js',
@@ -51,10 +53,11 @@ var concatVendorJS = function(minifyMe) {
         .pipe(gulpif(minifyMe, uglify()))
         .pipe(gulp.dest(publicDir));
 };
+
 var concatCSS = function(minifyMe) {
     return gulp.src([
-        './app/styles/reset.styl',
-        './app/styles/main.styl'
+        './src/app/styles/reset.styl',
+        './src/app/styles/main.styl'
     ])
         .pipe(stylus({
             use: [ nib() ],
@@ -71,14 +74,23 @@ var concatCSS = function(minifyMe) {
         .pipe(gulp.dest(publicDir))
         .pipe(reloadMe({stream:true}));
 };
-var copyStuff = function() {
+
+var copyAssets = function() {
     return gulp.src([
-        './app/assets/img/**/*',
-        './app/assets/vendor/**/*',
-    ], { base: './app/assets' })
+        './assets/img/**/*'
+    ], { base: './assets' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
+
+var copyViews = function() {
+    return gulp.src([
+            './src/app/views/**/*'
+        ], { base: './src' })
+        .pipe(filterEmptyDirs())
+        .pipe(gulp.dest('./'));
+};
+
 
 //removes empty dirs from stream
 var filterEmptyDirs = function() {
@@ -107,7 +119,6 @@ var syncMe = function() {
 
 //gets a gulp-rev stream and converts it to a hashes.json
 var getHashes = function() {
-
     // Note that we're not emitting the files here... this consumer effectively
     // stores the rev hashes then swallows the entire pipeline.
     var collect = function(file, enc, cb) {
@@ -124,7 +135,7 @@ var getHashes = function() {
         var file = new gutil.File({
             base: __dirname,
             cwd:  __dirname,
-            path: __dirname+'/.hashes.json'
+            path: __dirname+'/hashes.json'
         });
 
         file.contents = new Buffer(JSON.stringify(fileHashes, null, '\t'));
@@ -139,8 +150,8 @@ var getHashes = function() {
 //calculate file hashes for cache busting
 var revFiles = function() {
     return gulp.src(publicDir+'/**/*')
-        .pipe(gulp.dest(publicDir))  // Note that we're writing the original files,
-        .pipe(rev())                 // not the rev'd ones.
+        .pipe(gulp.dest(publicDir))
+        .pipe(rev())
         .pipe(getHashes())
         .pipe(gulp.dest(__dirname));
 };
@@ -154,18 +165,18 @@ gulp.task('clean', function() {
 
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
-    gulp.watch(['./app/assets/scripts/**/*.js'], function() {
+    gulp.watch(['./assets/scripts/**/*.js'], function() {
         console.log('File change - concatAppJS()');
         concatAppJS()
-            .pipe(reloadMe({stream:true}));
+            .pipe(reloadMe({stream: true}));
     });
-    gulp.watch('./app/styles/**/*.styl', function() {
+    gulp.watch('./src/app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
-    gulp.watch(['./app/assets/img/**/*'], function() {
-        console.log('File change - copyStuff()');
-        copyStuff()
+    gulp.watch(['./assets/img/**/*'], function() {
+        console.log('File change - copyAssets()');
+        copyAssets()
             .pipe(reloadMe({stream:true}));
     });
     gulp.watch(['./app/views/**/*'], function() {
@@ -173,7 +184,7 @@ gulp.task('default', ['clean'], function() {
         reloadMe();
     });
 
-    return merge(copyStuff(), concatCSS(), concatAppJS(), concatVendorJS())
+    return merge(copyAssets(), concatCSS(), concatAppJS(), concatVendorJS())
         .on('end', function() {
             syncMe();
         });
@@ -181,7 +192,7 @@ gulp.task('default', ['clean'], function() {
 
 //production build task
 gulp.task('build', ['clean'], function() {
-    return merge(copyStuff(), concatCSS(false), concatAppJS(true), concatVendorJS(true)).on('end', function() {
+    return merge(copyAssets(), concatCSS(false), concatAppJS(true), concatVendorJS(true)).on('end', function() {
         minifyImages();
         revFiles().on('end', function() {
             concatCSS(true);

@@ -1,11 +1,10 @@
-'use strict';
-const NamedRouter = require('named-router');
-const MainController = require('./controllers/MainController');
+import NamedRouter from 'named-router';
+import * as MainController from './controllers/MainController';
 
 /**
- * Singleton router for all the frontend routes
+ * Singleton router for all frontend routes
  */
-class AppRouter extends NamedRouter {
+export default class extends NamedRouter {
     constructor() {
         super();
         this.get('/', 'index', MainController.getFrontPage);
@@ -14,5 +13,3 @@ class AppRouter extends NamedRouter {
         this.post('/api/sendEmail', MainController.sendEmail);
     }
 }
-
-module.exports = new AppRouter();

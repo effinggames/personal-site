@@ -1,6 +1,8 @@
 'use strict';
+require("babel-register");
 const Cluster = require('cluster');
 const Logger = require('winston2');
+const App = require('./app/App').default;
 
 if (Cluster.isMaster) {
     let cpuCount = require('os').cpus().length;
@@ -16,17 +18,16 @@ if (Cluster.isMaster) {
         Cluster.fork();
     }
 
-    Cluster.on('exit', worker => {
+    Cluster.on('exit', function(worker) {
         Logger.info('Worker %d died :(', worker.id);
         Cluster.fork();
     });
 } else {
-    const App = require('./app/App');
     const app = new App();
 
     Logger.info('Worker %d running!', Cluster.worker.id);
 
-    app.listen(app.get('port'), () => {
+    app.listen(app.get('port'), function() {
         Logger.info('Express server listening on port ' + app.get('port'));
     });
 }

@@ -8,7 +8,7 @@ Personal landing page using Node, Express.js, Stylus.
 ```
 git clone https://github.com/effinggames/personal-site.git && cd personal-site
 npm install && bower install
-gulp build
+npm run build
 npm start
 ```
 Env variables:  

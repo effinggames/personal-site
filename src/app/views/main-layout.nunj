@@ -2,18 +2,18 @@
 <html>
     <head>
         <meta charSet="utf-8"/>
-        <title>[[ title ]]</title>
+        <title>{{ title }}</title>
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type='text/css' href="[[ getVersionedAsset('/app.css') ]]"/>
-        <link rel="shortcut icon" type="image/x-icon" href="[[ getVersionedAsset('/img/favicon.ico') ]]" />
+        <link rel="stylesheet" type='text/css' href="{{ getVersionedAsset('/app.css') }}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ getVersionedAsset('/img/favicon.ico') }}" />
     </head>
     <body ng-app="app" ng-controller="MainCtrl">
         <div id="header">
             <div class="container">
                 <div id="nav">
-                    <h1><a href="[[ linkTo('index') ]]">Rob Graeber</a></h1>
+                    <h1><a href="{{ linkTo('index') }}">Rob Graeber</a></h1>
                     <ul>
-                        <li><a href="[[ linkTo('about') ]]">About/Bio</a></li>
+                        <li><a href="{{ linkTo('about') }}">About/Bio</a></li>
                         <li><a href="https://www.linkedin.com/in/robgraeber">LinkedIn</a></li>
                         <li><a href="http://www.effinggames.com">Effing Games</a></li>
                     </ul>
@@ -28,16 +28,16 @@
         </div>
         <div id="footer">
             <div class="container">
-                <p>© [[ getCurrentYear() ]] Rob Graeber. All rights reserved.</p>
+                <p>© {{ getCurrentYear() }} Rob Graeber. All rights reserved.</p>
             </div>
         </div>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.10/es5-shim.min.js">
         <![endif]-->
         <script type="text/javascript">
-            window.data = [[ data | default({}) | stringify | safe ]];
+            window.data = {{ data | default({}) | stringify | safe }};
         </script>
-        <script type="text/javascript" src="[[ getVersionedAsset('/vendor.js') ]]"></script>
-        <script type="text/javascript" src="[[ getVersionedAsset('/app.js') ]]"></script>
+        <script type="text/javascript" src="{{ getVersionedAsset('/vendor.js') }}"></script>
+        <script type="text/javascript" src="{{ getVersionedAsset('/app.js') }}"></script>
     </body>
 </html>
