@@ -23,7 +23,7 @@ export default class extends Express {
         this.use(appRouter);
         this.use(Express.static(publicDir, { maxAge: productionMode ? 31536000000 : 0 })); //1 year caching
 
-        this.set('view engine', 'nunj');
+        this.set('view engine', 'twig');
         this.set('views', viewDir);
         this.set('port', process.env.PORT || 8000);
 
