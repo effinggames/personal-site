@@ -3,8 +3,8 @@ import * as Constants from '../../Constants';
 import * as Promise from 'bluebird';
 import * as Logger from 'winston2';
 
-var transporter = Promise.promisifyAll(Nodemailer.createTransport());
-var getEmailBody = req =>`
+const transporter = Promise.promisifyAll(Nodemailer.createTransport());
+const getEmailBody = req =>`
 Subject: ${req.body.subject}
 
 Message: ${req.body.message}
@@ -31,21 +31,25 @@ export const getContactPage = function(req, res) {
     });
 };
 
-export const sendEmail = function(req, res) {
+export const sendEmail = async function(req, res) {
     Logger.info('Attempting to send mail:');
-    var errRsp = {
+
+    const errRsp = {
         status: 'ERROR',
         results: 'An error occurred!'
     };
+
     if (req.body.senderName && req.body.email && req.body.subject && req.body.message) {
         Logger.info('Request valid, sending email');
 
-        transporter.sendMailAsync({
-            from: req.body.senderName + ` <${req.body.email}>`,
-            to: Constants.contactEmail,
-            subject: 'Message from RobGraeber.com',
-            text: getEmailBody(req)
-        }).then(info => {
+        try {
+            const info = await transporter.sendMailAsync({
+                from: req.body.senderName + ` <${req.body.email}>`,
+                to: Constants.contactEmail,
+                subject: 'Message from RobGraeber.com',
+                text: getEmailBody(req)
+            });
+
             if (info.pending.length > 0) {
                 Logger.info('Email pending:', info);
                 throw new Error("Email must not be pending");
@@ -56,10 +60,10 @@ export const sendEmail = function(req, res) {
                     results: 'Message sent successfully!'
                 });
             }
-        }).catch(err => {
+        } catch(err) {
             Logger.info('Err:', err);
             res.send(errRsp)
-        });
+        }
     } else {
         Logger.info('Err: Missing fields -', req.body);
         res.send(errRsp);

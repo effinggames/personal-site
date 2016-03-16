@@ -1,21 +1,20 @@
-var path = require('path');
-var through = require('through2');
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var rev = require('gulp-rev');
+var gulpif = require('gulp-if');
 var clean = require('gulp-clean');
 var gutil   = require('gulp-util');
-var imageMin = require('gulp-imagemin');
-var sourcemaps = require('gulp-sourcemaps');
-var ngAnnotate = require('gulp-ng-annotate');
-var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
 var stylusNodes = require('stylus').nodes;
+var webpack = require('webpack-stream');
+var imageMin = require('gulp-imagemin');
 var cssMin = require('gulp-minify-css');
+var sourcemaps = require('gulp-sourcemaps');
 var nib = require('nib');
+var path = require('path');
 var es = require('event-stream');
+var through = require('through2');
 var merge = require('event-stream').concat;
 var browserSync = require('browser-sync');
 var reloadMe = require('browser-sync').reload;
@@ -25,31 +24,22 @@ var publicDir = __dirname + '/public',
 
 var fileHashes = {};
 
-var concatAppJS = function(minifyMe) {
-    var stream = gulp.src([
-            './assets/scripts/App.js',
-            './assets/scripts/**/*.js'
-        ])
-        .pipe(gulpif(minifyMe, ngAnnotate()))
-        .pipe(sourcemaps.init())
-        .pipe(babel());
-
-    stream.on('error', function() {
-        console.log('Error parsing JS!');
-    });
-
-    return stream
+var webpackAppJS = function(minifyMe) {
+    return gulp.src('./src/assets/scripts/App.js')
+        .pipe(webpack({
+            devtool: 'inline-source-maps',
+            module: {
+                loaders: [{
+                    test: /.js$/,
+                    loader: 'ng-annotate'
+                }, {
+                    test: /.js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    loader: 'babel-loader'
+                }]
+            }
+        }))
         .pipe(concat('app.js'))
-        .pipe(gulpif(minifyMe, uglify()))
-        .pipe(gulp.dest(publicDir));
-};
-
-var concatVendorJS = function(minifyMe) {
-    return gulp.src([
-        './bower_components/jquery/dist/jquery.js',
-        './bower_components/angular/angular.js'
-    ])
-        .pipe(concat('vendor.js'))
         .pipe(gulpif(minifyMe, uglify()))
         .pipe(gulp.dest(publicDir));
 };
@@ -77,20 +67,11 @@ var concatCSS = function(minifyMe) {
 
 var copyAssets = function() {
     return gulp.src([
-        './assets/img/**/*'
-    ], { base: './assets' })
+        './src/assets/img/**/*'
+    ], { base: './src/assets' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
-
-var copyViews = function() {
-    return gulp.src([
-            './src/app/views/**/*'
-        ], { base: './src' })
-        .pipe(filterEmptyDirs())
-        .pipe(gulp.dest('./'));
-};
-
 
 //removes empty dirs from stream
 var filterEmptyDirs = function() {
@@ -165,16 +146,16 @@ gulp.task('clean', function() {
 
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
-    gulp.watch(['./assets/scripts/**/*.js'], function() {
-        console.log('File change - concatAppJS()');
-        concatAppJS()
+    gulp.watch(['./src/assets/scripts/**/*.js'], function() {
+        console.log('File change - webpackAppJS()');
+        webpackAppJS()
             .pipe(reloadMe({stream: true}));
     });
     gulp.watch('./src/app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
-    gulp.watch(['./assets/img/**/*'], function() {
+    gulp.watch(['./src/assets/img/**/*'], function() {
         console.log('File change - copyAssets()');
         copyAssets()
             .pipe(reloadMe({stream:true}));
@@ -184,7 +165,7 @@ gulp.task('default', ['clean'], function() {
         reloadMe();
     });
 
-    return merge(copyAssets(), concatCSS(), concatAppJS(), concatVendorJS())
+    return merge(copyAssets(), concatCSS(), webpackAppJS())
         .on('end', function() {
             syncMe();
         });
@@ -192,7 +173,7 @@ gulp.task('default', ['clean'], function() {
 
 //production build task
 gulp.task('build', ['clean'], function() {
-    return merge(copyAssets(), concatCSS(false), concatAppJS(true), concatVendorJS(true)).on('end', function() {
+    return merge(copyAssets(), concatCSS(false), webpackAppJS(true)).on('end', function() {
         minifyImages();
         revFiles().on('end', function() {
             concatCSS(true);

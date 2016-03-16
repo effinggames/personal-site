@@ -1,5 +1,6 @@
 'use strict';
-require("babel-register");
+require('babel-register');
+require('babel-polyfill');
 const Cluster = require('cluster');
 const Logger = require('winston2');
 const App = require('./app/App').default;
