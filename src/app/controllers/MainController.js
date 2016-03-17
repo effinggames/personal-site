@@ -1,10 +1,10 @@
 import * as Nodemailer from 'nodemailer';
 import * as Constants from '../../Constants';
-import * as Promise from 'bluebird';
+import * as Bluebird from 'bluebird';
 import * as Logger from 'winston2';
 
-const transporter = Promise.promisifyAll(Nodemailer.createTransport());
-const getEmailBody = req =>`
+const transporter = Bluebird.promisifyAll(Nodemailer.createTransport());
+const getEmailBody = req => `
 Subject: ${req.body.subject}
 
 Message: ${req.body.message}
@@ -52,7 +52,7 @@ export const sendEmail = async function(req, res) {
 
             if (info.pending.length > 0) {
                 Logger.info('Email pending:', info);
-                throw new Error("Email must not be pending");
+                throw new Error('Email must not be pending');
             } else {
                 Logger.info('Email sent successfully!');
                 res.send({

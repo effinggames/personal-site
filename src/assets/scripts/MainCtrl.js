@@ -1,8 +1,7 @@
 import * as angular from 'angular';
 
 angular.module('app')
-    .controller('MainCtrl', function($http, $scope, $window) {
-        $scope.$window = $window;
+    .controller('MainCtrl', function($http, $scope) {
 
         $scope.sendEmail = async function() {
             $scope.contactForm.statusText = 'Submitting message..';
@@ -19,5 +18,6 @@ angular.module('app')
             } else {
                 $scope.contactForm.statusText = 'An error occurred!';
             }
+            $scope.$apply();
         }
     });
