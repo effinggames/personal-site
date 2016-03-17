@@ -7,7 +7,7 @@
         <link rel="stylesheet" type='text/css' href="{{ getVersionedAsset('/app.css') }}"/>
         <link rel="shortcut icon" type="image/x-icon" href="{{ getVersionedAsset('/img/favicon.ico') }}" />
     </head>
-    <body ng-app="app" ng-controller="MainCtrl">
+    <body>
         <div id="header">
             <div class="container">
                 <div id="nav">
@@ -37,6 +37,6 @@
         <script type="text/javascript">
             window.data = {{ data | default({}) | stringify | safe }};
         </script>
-        <script type="text/javascript" src="{{ getVersionedAsset('/app.js') }}"></script>
+        <script type="text/javascript" src="{{ getVersionedAsset('/app.js') }}" data-no-instant></script>
     </body>
 </html>
