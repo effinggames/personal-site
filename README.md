@@ -16,6 +16,6 @@ Env variables:
 
 
 NPM Tasks:
-`npm start`: Runs npm build + starts server.
-`npm build`: Compiles, minifies, and compresses the assets (for production).
+`npm start`: Runs npm build + starts server.  
+`npm build`: Compiles, minifies, and compresses the assets (for production).  
 `npm build-dev`: Compiles + Watches the js, css, and image files for changes to recompile.
