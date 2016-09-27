@@ -14,20 +14,22 @@ This mail is sent via contact form on Rob Graeber http://www.robgraeber.com
 `;
 
 export const getFrontPage = function(req, res) {
+    const metaDescription = 'Rob Graeber is a San Francisco-based software engineer, entrepreneur, and creator of awesome iPhone games and online games like Effing Worms, Stick Badminton, and more.';
     res.render('pages/front-page', {
-        title: 'Rob Graeber'
+        metaTitle: 'Rob Graeber | Official Website',
+        metaDescription
     });
 };
 
 export const getAboutPage = function(req, res) {
     res.render('pages/about-page', {
-        title: 'About/Bio of Robert L. Graeber'
+        metaTitle: 'About/Bio of Robert L. Graeber'
     });
 };
 
 export const getContactPage = function(req, res) {
     res.render('pages/contact-page', {
-        title: 'Contact Rob Graeber'
+        metaTitle: 'Contact Rob Graeber'
     });
 };
 

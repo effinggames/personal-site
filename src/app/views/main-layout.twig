@@ -2,7 +2,12 @@
 <html>
     <head>
         <meta charSet="utf-8"/>
-        <title>{{ title }}</title>
+        {% if metaDescription %}
+        <meta name="description" content="{{ metaDescription }}">
+        {% endif %}
+        {% if metaTitle %}
+        <title>{{ metaTitle }}</title>
+        {% endif %}
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type='text/css' href="{{ getVersionedAsset('/app.css') }}"/>
         <link rel="shortcut icon" type="image/x-icon" href="{{ getVersionedAsset('/img/favicon.ico') }}" />
@@ -11,7 +16,7 @@
         <div id="header">
             <div class="container">
                 <div id="nav">
-                    <h1><a href="{{ linkTo('index') }}">Rob Graeber</a></h1>
+                    <h3><a href="{{ linkTo('index') }}">Rob Graeber</a></h3>
                     <ul>
                         <li><a href="{{ linkTo('about') }}">About/Bio</a></li>
                         <li><a href="https://www.linkedin.com/in/robgraeber">LinkedIn</a></li>
