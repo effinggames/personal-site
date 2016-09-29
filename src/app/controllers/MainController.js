@@ -23,13 +23,13 @@ export const getFrontPage = function(req, res) {
 
 export const getAboutPage = function(req, res) {
     res.render('pages/about-page', {
-        metaTitle: 'About/Bio of Robert L. Graeber'
+        metaTitle: 'About | Rob Graeber'
     });
 };
 
 export const getContactPage = function(req, res) {
     res.render('pages/contact-page', {
-        metaTitle: 'Contact Rob Graeber'
+        metaTitle: 'Contact | Rob Graeber'
     });
 };
 
