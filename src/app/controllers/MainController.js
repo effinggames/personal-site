@@ -14,7 +14,7 @@ This mail is sent via contact form on Rob Graeber http://www.robgraeber.com
 `;
 
 export const getFrontPage = function(req, res) {
-    const metaDescription = 'Rob Graeber is a San Francisco-based software engineer, entrepreneur, and creator of awesome iPhone games and online games like Effing Worms, Stick Badminton, and more.';
+    const metaDescription = 'Rob Graeber is a San Francisco-based software engineer, entrepreneur, and creator of awesome online games like Effing Worms, Stick Badminton, and more.';
     res.render('pages/front-page', {
         metaTitle: 'Rob Graeber | Official Website',
         metaDescription
