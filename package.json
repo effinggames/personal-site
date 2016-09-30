@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node ./src/Main.js",
+    "start": "npm run build && node ./Main.js",
     "build": "gulp build",
     "build-dev": "gulp default",
     "test": "echo \"NPM Test: no tests specified\"",
