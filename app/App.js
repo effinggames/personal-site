@@ -6,9 +6,9 @@ import * as Nunjucks from 'nunjucks';
 
 const productionMode = process.env.NODE_ENV === 'production';
 const viewDir = __dirname + '/views';
-const publicDir = __dirname + '/../../public';
+const publicDir = __dirname + '/../public';
 
-const hashJson = productionMode ? require('../../hashes.json') : null;
+const hashJson = productionMode ? require('../hashes.json') : null;
 const appRouter = new AppRouter();
 
 /**

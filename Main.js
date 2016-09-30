@@ -6,6 +6,10 @@ const Logger = require('winston2');
 const App = require('./app/App').default;
 const OS = require('os');
 
+/**
+ * Starts the app among multiple workers using node cluster.
+ * @param {Function} startFunc The function to run on each workers.
+ */
 var initializeCluster = function(startFunc) {
     if (Cluster.isMaster) {
         let cpuCount = OS.cpus().length;

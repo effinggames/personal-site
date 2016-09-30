@@ -25,7 +25,7 @@ var publicDir = __dirname + '/public',
 var fileHashes = {};
 
 var webpackAppJS = function(minifyMe) {
-    return gulp.src('./src/assets/scripts/App.js')
+    return gulp.src('./assets/scripts/App.js')
         .pipe(webpack({
             devtool: 'inline-source-maps',
             module: {
@@ -49,8 +49,8 @@ var webpackAppJS = function(minifyMe) {
 
 var concatCSS = function(minifyMe) {
     return gulp.src([
-        './src/app/styles/reset.styl',
-        './src/app/styles/main.styl'
+        './app/styles/reset.styl',
+        './app/styles/main.styl'
     ])
         .pipe(stylus({
             use: [ nib() ],
@@ -70,8 +70,8 @@ var concatCSS = function(minifyMe) {
 
 var copyAssets = function() {
     return gulp.src([
-        './src/assets/img/**/*'
-    ], { base: './src/assets' })
+        './assets/img/**/*'
+    ], { base: './assets' })
         .pipe(filterEmptyDirs())
         .pipe(gulp.dest(publicDir));
 };
@@ -149,16 +149,16 @@ gulp.task('clean', function() {
 
 //build + watching, for development
 gulp.task('default', ['clean'], function() {
-    gulp.watch(['./src/assets/scripts/**/*.js'], function() {
+    gulp.watch(['./assets/scripts/**/*.js'], function() {
         console.log('File change - webpackAppJS()');
         webpackAppJS()
             .pipe(reloadMe({stream: true}));
     });
-    gulp.watch('./src/app/styles/**/*.styl', function() {
+    gulp.watch('./app/styles/**/*.styl', function() {
         console.log('File change - concatCSS()');
         concatCSS();
     });
-    gulp.watch(['./src/assets/img/**/*'], function() {
+    gulp.watch(['./assets/img/**/*'], function() {
         console.log('File change - copyAssets()');
         copyAssets()
             .pipe(reloadMe({stream:true}));
