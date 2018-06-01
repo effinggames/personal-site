@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node ./Main.js",
+    "start": "node ./Main.js",
     "build": "gulp build",
     "build-dev": "gulp default",
     "test": "echo \"NPM Test: no tests specified\"",
-    "nodemon": "nodemon --ignore src/assets/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
+    "nodemon":
+      "nodemon --ignore src/assets/scripts/ --ignore public/ --ignore bower_components --ignore node_modules Main.js"
   },
   "engines": {
     "node": "4.2.x",
