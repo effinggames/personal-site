@@ -13,7 +13,8 @@ npm start
 Env variables:  
 `CONTACT_EMAIL`: Email to send contact form messages.  
 `SENDGRID_API_KEY`: Sendgrid api key to send contact form emails.  
-`NODE_ENV`: Set to 'production' for multi-core + template caching.
+`NODE_ENV`: Set to 'production' for multi-core + template caching.   
+`PORT`: Sets the port the server listens on. <Defaults to 8000>  
 
 NPM Tasks:  
 `npm start`: Runs npm build + starts server.  
