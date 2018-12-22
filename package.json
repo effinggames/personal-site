@@ -28,7 +28,7 @@
     "babel-core": "^6.7.2",
     "babel-loader": "^6.2.4",
     "browser-sync": "^1.9.1",
-    "event-stream": "^3.2.2",
+    "event-stream": "3.3.4",
     "gulp": "^3.8.11",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.4.3",
