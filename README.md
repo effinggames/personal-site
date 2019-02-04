@@ -1,4 +1,4 @@
-# Personal-Site
+# personal-site
 
 Personal landing page using Node, Express.js, Stylus.
 
