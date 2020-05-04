@@ -15,7 +15,7 @@ var initializeCluster = function(startFunc) {
     let cpuCount = OS.cpus().length;
 
     if (process.env.NODE_ENV === 'production') {
-      Logger.info('Running in production mode!');
+      Logger.info('Running in asdf mode!');
     } else {
       Logger.info('Running in development mode!');
       cpuCount = 1;
